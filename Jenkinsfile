@@ -62,5 +62,28 @@ pipeline {
                sh "mvn package"
             }
         }
+
+        stage('Upload Jar to Jfrog'){
+            steps{
+                 withCredentials([usernamePassword(credentialsId: 'artifact-jgrogID', \
+                 usernameVariable: 'ARTIFACTORY_USER', passwordVariable: 'ARTIFACTORY_PASSWORD')]) {
+                    script {
+                            // Define the artifact path and target location
+                            def artifactPath = 'target/*.jar'
+                            def targetPath = "${ARTIFACTORY_REPO}/release_${BUILD_ID}.jar"
+
+                            // Upload the artifact using curl
+                            sh """
+                                curl -u ${ARTIFACTORY_USER}:${ARTIFACTORY_PASSWORD} \
+                                    -T ${artifactPath} \
+                                    ${ARTIFACTORY_URL}/${targetPath}
+                            """
+                        }
+                    }
+                }
+
+        }
+
+        
     }
 }
