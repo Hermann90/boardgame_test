@@ -82,7 +82,7 @@ pipeline {
                         def targetPath = "${ARTIFACTORY_REPO}/release-${BUILD_ID}.jar"
 
                         // Upload the artifact using curl
-                        sh "echo ${pom.name}"
+                        //sh "echo ${pom.name}"
                         sh """
                             curl -u ${ARTIFACTORY_USER}:${ARTIFACTORY_PASSWORD} \
                                 -T ${artifactPath} \
