@@ -67,6 +67,12 @@ After installing these plugins, you may need to configure them according to your
  - create the Jfrog authentication in Jenkins :
     * jenkins -> manage jenkins -> credentials
     * add your Jfrog username and password
+    * change the ARTIFACT_URL variable with your own repo
+
+## Build Images
+
+
+## Push image to DOckerHub
 
 ## Pipeline 
 

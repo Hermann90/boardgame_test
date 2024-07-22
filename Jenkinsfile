@@ -7,7 +7,7 @@ pipeline {
     // Define the global env variable 
     environment {
         SCANNER_HOME= tool 'sonar'
-        ARTIFACTORY_URL = 'http://ec2-98-80-74-206.compute-1.amazonaws.com:8081/artifactory/geolocation'
+        ARTIFACTORY_URL = 'http://52.10.149.220:8081/artifactory/geolocation/'
         ARTIFACTORY_REPO = 'geolocation'
         RELEASE_VERSION = 'jun-24-v2'
     }
@@ -82,6 +82,15 @@ pipeline {
                     }
                 }
 
+        }
+
+        stage('Build Docker Image'){
+            steps{
+                script{
+                    sh 'docker build -t kserge2001/geo-app-img:latest .' 
+                    sh 'docker build -t kserge2001/geo-app-img:${BUILD_ID} .'
+                }
+            }
         }
 
 
