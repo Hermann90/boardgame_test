@@ -10,7 +10,7 @@ pipeline {
         ARTIFACTORY_URL = 'http://52.10.149.220:8081/artifactory/geolocation/'
         ARTIFACTORY_REPO = 'geolocation'
         RELEASE_VERSION = 'jun-24-v2'
-        def pom = readMavenPom file: 'pom.xml'
+        //def pom = readMavenPom file: 'pom.xml'
     }
 
 
@@ -71,17 +71,23 @@ pipeline {
                  withCredentials([usernamePassword(credentialsId: 'artifact-jgrogID', \
                  usernameVariable: 'ARTIFACTORY_USER', passwordVariable: 'ARTIFACTORY_PASSWORD')]) {
                     script {
-                            // Define the artifact path and target location
-                            def artifactPath = 'target/*.jar'
-                            def targetPath = "${ARTIFACTORY_REPO}/release-${BUILD_ID}.jar"
 
-                            // Upload the artifact using curl
-                            sh "echo ${pom.name}"
-                            sh """
-                                curl -u ${ARTIFACTORY_USER}:${ARTIFACTORY_PASSWORD} \
-                                    -T ${artifactPath} \
-                                    ${ARTIFACTORY_URL}/${targetPath}
-                            """
+                        def mavenPom = readMavenPom file: 'pom.xml'
+                        POM_VERSION = "${mavenPom.version}"
+                        APP_NAME = "${mavenPom.name}"
+                        echo "${POM_VERSION}"
+                        echo "${APP_NAME}"
+                        // Define the artifact path and target location
+                        def artifactPath = 'target/*.jar'
+                        def targetPath = "${ARTIFACTORY_REPO}/release-${BUILD_ID}.jar"
+
+                        // Upload the artifact using curl
+                        sh "echo ${pom.name}"
+                        sh """
+                            curl -u ${ARTIFACTORY_USER}:${ARTIFACTORY_PASSWORD} \
+                                -T ${artifactPath} \
+                                ${ARTIFACTORY_URL}/${targetPath}
+                        """
                         }
                     }
                 }
