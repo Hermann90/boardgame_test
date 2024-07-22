@@ -84,8 +84,8 @@ pipeline {
      stage('Build Docker Image'){
         steps{
            script{
-            sh 'docker build -t kserge2001/geo-app-img:latest .' 
-           sh 'docker build -t kserge2001/geo-app-img:${BUILD_ID} .'
+            sh 'docker build -t hermann90/geo-app-img:latest .' 
+           sh 'docker build -t hermann90/geo-app-img:${BUILD_ID} .'
            }
         }
      }

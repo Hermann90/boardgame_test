@@ -10,6 +10,10 @@ pipeline {
         ARTIFACTORY_URL = 'http://52.10.149.220:8081/artifactory/geolocation/'
         ARTIFACTORY_REPO = 'geolocation'
         RELEASE_VERSION = 'jun-24-v2'
+        
+        def mavenPom = readMavenPom file: 'pom.xml'
+        POM_VERSION = "${mavenPom.version}"
+        APP_NAME = "${mavenPom.name}"
         //def pom = readMavenPom file: 'pom.xml'
     }
 
@@ -72,14 +76,12 @@ pipeline {
                  usernameVariable: 'ARTIFACTORY_USER', passwordVariable: 'ARTIFACTORY_PASSWORD')]) {
                     script {
 
-                        def mavenPom = readMavenPom file: 'pom.xml'
-                        POM_VERSION = "${mavenPom.version}"
-                        APP_NAME = "${mavenPom.name}"
+                        
                         echo "${POM_VERSION}"
                         echo "${APP_NAME}"
                         // Define the artifact path and target location
                         def artifactPath = 'target/*.jar'
-                        def targetPath = "${ARTIFACTORY_REPO}/${APP_NAME}-$${POM_VERSION}.jar"
+                        def targetPath = "${ARTIFACTORY_REPO}/${APP_NAME}-${POM_VERSION}.jar"
 
                         // Upload the artifact using curl
                         //sh "echo ${pom.name}"
@@ -97,18 +99,29 @@ pipeline {
         stage('Build Docker Image'){
             steps{
                 script{
-                    sh 'docker build -t kserge2001/geo-app-img:latest .' 
-                    sh 'docker build -t kserge2001/geo-app-img:${BUILD_ID} .'
+                    sh """docker build -t hermann90/${APP_NAME}:latest .""" 
+                    sh """docker build -t hermann90/${APP_NAME}:${POM_VERSION} ."""
                 }
             }
         }
 
         stage('Scan Image'){
             steps{
-                sh   'trivy image --format table -o docker_image_report.html kserge2001/geo-app-img:latest'
+                sh   """trivy image --format table -o docker_image_report.html hermann90/${APP_NAME}:${POM_VERSION}"""
             }
         }
 
+        stage('Push Docker Image') {
+            steps {
+               script {
+                   withDockerRegistry(credentialsId: 'registryID', toolName: 'docker') {
+                            sh """docker push hermann90/${APP_NAME}:latest"""
+                            sh """docker push hermann90/${APP_NAME}:${BUILD_ID}"""
+                            sh """docker rmi -f hermann90/${APP_NAME}:latest hermann90/${APP_NAME}:${BUILD_ID}"""
+                    }
+               }
+            }
+        }
 
     }
 }
