@@ -79,7 +79,7 @@ pipeline {
                         echo "${APP_NAME}"
                         // Define the artifact path and target location
                         def artifactPath = 'target/*.jar'
-                        def targetPath = "${ARTIFACTORY_REPO}/release-${BUILD_ID}.jar"
+                        def targetPath = "${ARTIFACTORY_REPO}/${APP_NAME}-$${POM_VERSION}.jar"
 
                         // Upload the artifact using curl
                         //sh "echo ${pom.name}"
