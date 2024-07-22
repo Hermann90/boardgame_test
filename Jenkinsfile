@@ -115,9 +115,9 @@ pipeline {
             steps {
                script {
                    withDockerRegistry(credentialsId: 'registryID', toolName: 'docker') {
-                            sh """docker push hermann90/${APP_NAME}:latest"""
-                            sh """docker push hermann90/${APP_NAME}:${BUILD_ID}"""
-                            sh """docker rmi -f hermann90/${APP_NAME}:latest hermann90/${APP_NAME}:${BUILD_ID}"""
+                        sh """docker push hermann90/${APP_NAME}:latest"""
+                        sh """docker push hermann90/${APP_NAME}:${POM_VERSION}"""
+                        sh """docker rmi -f hermann90/${APP_NAME}:latest hermann90/${APP_NAME}:${POM_VERSION}"""
                     }
                }
             }

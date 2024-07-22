@@ -45,7 +45,7 @@
    - Install it through the plugin manager like the others.
 9. **pipeline-utility-steps**
     - plugin that allow you to read pom file so that you can get the version of the application defined in the pom.xml file. 
-    
+
 After installing these plugins, you may need to configure them according to your specific environment and requirements. This typically involves setting up credentials, configuring paths, and specifying options in Jenkins global configuration or individual job configurations. Each plugin usually comes with its own set of documentation to guide you through the configuration process.
 
 ![alt text](image.png)
@@ -74,7 +74,22 @@ After installing these plugins, you may need to configure them according to your
 ## Build Images
 
 
-## Push image to DOckerHub
+## Push image to DockerHub
+    * Create the personal access token in Dockerhub
+    * login -> Account Setting -> personal-access-tokens -> Generate
+    * Create credential in jenkins with this personal access token value and use it
+
+## Helm CHart section: 
+    * Install helm in the jenkins server if is not : 
+    ```
+        sudo apt update
+        sudo snap install helm --classic
+    ```
+
+    * Generate the chart using heml command
+     ```
+        helm create app_deploy
+    ```
 
 ## Pipeline 
 
