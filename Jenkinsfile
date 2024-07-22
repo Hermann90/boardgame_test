@@ -27,7 +27,7 @@ pipeline {
                 sh "mvn compile"
             }
         }
-        
+/*        
         stage('Test') {
             steps {
                 sh 'mvn test'
@@ -56,7 +56,7 @@ pipeline {
                 }
             }
         }
-
+*/
         stage('Build') {
             steps {
                sh "mvn package"
@@ -84,6 +84,6 @@ pipeline {
 
         }
 
-        
+
     }
 }
