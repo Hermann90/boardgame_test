@@ -43,7 +43,9 @@
    - This plugin extends Jenkins Pipeline with steps to build, publish, and run Docker containers as part of your Pipeline scripts.
    - It provides a convenient way to manage Docker containers directly from Jenkins Pipelines.
    - Install it through the plugin manager like the others.
-
+9. **pipeline-utility-steps**
+    - plugin that allow you to read pom file so that you can get the version of the application defined in the pom.xml file. 
+    
 After installing these plugins, you may need to configure them according to your specific environment and requirements. This typically involves setting up credentials, configuring paths, and specifying options in Jenkins global configuration or individual job configurations. Each plugin usually comes with its own set of documentation to guide you through the configuration process.
 
 ![alt text](image.png)
