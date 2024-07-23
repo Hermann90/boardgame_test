@@ -89,9 +89,10 @@ After installing these plugins, you may need to configure them according to your
     * Instal yq that can allow to modifry the content of yml file
     
     ```
-    sudo snap install yq 
+        sudo wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/local/bin/yq &&sudo chmod +x /usr/local/bin/yq
     ```
-    
+                # yq -i '.image.repository = "172.16.00.00"' values.yaml
+
     * Generate the chart using heml command
      ```
         helm create app_deploy

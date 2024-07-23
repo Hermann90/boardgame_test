@@ -126,6 +126,8 @@ pipeline {
         stage('Build Helm With Value') {
             steps {
                script {
+                    sh """cat app_deploy/values.yaml"""
+                    sh """ sudo chmod 766 app_deploy/values.yaml"""
                     sh """yq -i '.image.tag = "${POM_VERSION}"' app_deploy/values.yaml"""
                     sh """yq -i '.image.repository = "hermann90/${APP_NAME}"' app_deploy/values.yaml"""
                     sh """cat app_deploy/values.yaml"""
