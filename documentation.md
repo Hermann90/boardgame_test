@@ -80,12 +80,18 @@ After installing these plugins, you may need to configure them according to your
     * Create credential in jenkins with this personal access token value and use it
 
 ## Helm CHart section: 
-    * Install helm in the jenkins server if is not : 
+
+* Install helm in the jenkins server if is not : 
     ```
         sudo apt update
         sudo snap install helm --classic
     ```
-
+    * Instal yq that can allow to modifry the content of yml file
+    
+    ```
+    sudo snap install yq 
+    ```
+    
     * Generate the chart using heml command
      ```
         helm create app_deploy
