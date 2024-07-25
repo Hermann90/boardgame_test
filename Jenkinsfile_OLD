@@ -7,7 +7,7 @@ pipeline {
         SCANNER_HOME= tool 'sonar'
         ARTIFACTORY_URL = 'http://ec2-98-80-74-206.compute-1.amazonaws.com:8081/artifactory/geolocation'
         ARTIFACTORY_REPO = 'geolocation'
-        RELEASE_VERSION: jun-24-v2
+        RELEASE_VERSION = jun-24-v2
     }
 
     stages{

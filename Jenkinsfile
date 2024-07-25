@@ -134,5 +134,40 @@ pipeline {
             }
         }
 
+        stage('Create Helm Artifact') {
+            steps {
+               sh "helm package app_deploy"
+            }
+        }
+
+        /*
+        stage('Upload Jar to Jfrog'){
+            
+            //def appName = pom.app
+            steps{
+                 withCredentials([usernamePassword(credentialsId: 'artifact-jgrogID', \
+                 usernameVariable: 'ARTIFACTORY_USER', passwordVariable: 'ARTIFACTORY_PASSWORD')]) {
+                    script {
+
+                        
+                        echo "${POM_VERSION}"
+                        echo "${APP_NAME}"
+                        // Define the artifact path and target location
+                        def artifactPath = 'target/*.jar'
+                        def targetPath = "${ARTIFACTORY_REPO}/${APP_NAME}-${POM_VERSION}.jar"
+
+                        // Upload the artifact using curl
+                        //sh "echo ${pom.name}"
+                        sh """
+                            curl -u ${ARTIFACTORY_USER}:${ARTIFACTORY_PASSWORD} \
+                                -T ${artifactPath} \
+                                ${ARTIFACTORY_URL}/${targetPath}
+                        """
+                        }
+                    }
+                }
+
+        }*/
+
     }
 }
