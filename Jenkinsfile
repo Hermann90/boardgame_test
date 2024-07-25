@@ -140,7 +140,7 @@ pipeline {
             }
         }
 
-        /*
+        
         stage('Upload Jar to Jfrog'){
             
             //def appName = pom.app
@@ -153,8 +153,8 @@ pipeline {
                         echo "${POM_VERSION}"
                         echo "${APP_NAME}"
                         // Define the artifact path and target location
-                        def artifactPath = 'target/*.jar'
-                        def targetPath = "${ARTIFACTORY_REPO}/${APP_NAME}-${POM_VERSION}.jar"
+                        def artifactPath = '*.tgz'
+                        def targetPath = "${ARTIFACTORY_REPO}/app_deploy-${POM_VERSION}.tgz"
 
                         // Upload the artifact using curl
                         //sh "echo ${pom.name}"
@@ -167,7 +167,7 @@ pipeline {
                     }
                 }
 
-        }*/
+        }
 
     }
 }
