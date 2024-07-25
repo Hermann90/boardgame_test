@@ -7,7 +7,7 @@ pipeline {
     // Define the global env variable 
     environment {
         SCANNER_HOME= tool 'sonar'
-        ARTIFACTORY_URL = 'http://52.10.149.220:8081/artifactory/geolocation/'
+        ARTIFACTORY_URL = 'http://35.90.198.69:8081/artifactory/geolocation/'
         ARTIFACTORY_REPO = 'geolocation'
         RELEASE_VERSION = 'jun-24-v2'
         
