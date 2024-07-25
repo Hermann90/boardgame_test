@@ -141,7 +141,7 @@ pipeline {
         }
 
         
-        stage('Upload Jar to Jfrog'){
+        stage('Upload Helm Chart to Jfrog'){
             
             //def appName = pom.app
             steps{
