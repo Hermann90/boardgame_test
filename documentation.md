@@ -1,3 +1,27 @@
+# Project Description : 
+The aim is to set up a Full Pipeline: 
+- Set up a terraform code to launch the various machines for the full devOps pipeline.
+- The machines to be configured contain the following main tools: 
+1. Jenkins 
+2. Jfrog
+3. Sonarqube
+4. a Kubernetes cluster
+
+The steps of our configuration are : 
+1. Creation and integration of a private github repository in Jenkins
+2. Integration of maven in Jenkins
+3. Integration of SonarQube in Jenkins
+4. Source code analysis with Trivy
+5. Integration of JFrog into Jenkins, then upload of the compiled Jar file
+6. Docker integration in Jenkins
+7. Docker image creation and analysis with Trivy
+8. Send images to DockerHub
+9. Integration of Helm in Jenkins then generation of helm charts for the project
+10. Sending helm packages to Jfrog
+11. Configure Kubernetes for deployment
+
+![alt text](image(1).png)
+
 # Description of the process to configure infra
 ## Step 1: Set-up plugin
 
